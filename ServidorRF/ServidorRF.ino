@@ -1,13 +1,3 @@
-// nrf24_reliable_datagram_server.pde
-// -*- mode: C++ -*-
-// Example sketch showing how to create a simple addressed, reliable messaging server
-// with the RHReliableDatagram class, using the RH_NRF24 driver to control a NRF24 radio.
-// It is designed to work with the other example nrf24_reliable_datagram_client
-// Tested on Uno with Sparkfun WRL-00691 NRF24L01 module
-// Tested on Teensy with Sparkfun WRL-00691 NRF24L01 module
-// Tested on Anarduino Mini (http://www.anarduino.com/mini/) with RFM73 module
-// Tested on Arduino Mega with Sparkfun WRL-00691 NRF25L01 module
-
 #include <RHReliableDatagram.h>
 #include <RH_NRF24.h>
 #include <SPI.h>
@@ -46,21 +36,14 @@ void loop()
     for (byte i = 0; i < 24; i++) {
       buf[i] = " ";
     }
-    // turn the LED off by making the voltage LOW
-    //delay(10);
     // Wait for a message addressed to us from the client
     uint8_t len = sizeof(buf);
     uint8_t from;
     if (manager.recvfromAck(buf, &len, &from))
     {
-      
       if (buf[0] != '~') {
-         
-
             Serial.println((char*)buf);
             delay(10);
-
-
       } else {
         
          Serial.print((char)buf[0]);
@@ -74,11 +57,6 @@ void loop()
         Serial.println("");
         //Serial.println(DEC,*he);
       }
-
-
-
-      // Send a reply back to the originator client
-
     }
   }
 }
